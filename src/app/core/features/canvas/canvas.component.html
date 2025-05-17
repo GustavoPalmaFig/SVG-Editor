@@ -1,0 +1,28 @@
+<div class="border border-gray-300 rounded-md overflow-hidden bg-white">
+  <svg #svgCanvas class="w-full h-full">
+    @for(svgElement of svgElements; track svgElement.id) {
+    <g>
+      @if (svgElement.type === 'rectangle') {
+      <rect
+        [attr.x]="svgElement.x"
+        [attr.y]="svgElement.y"
+        [attr.width]="svgElement.width"
+        [attr.height]="svgElement.height"
+        [attr.rx]="svgElement.borderRadius"
+        [attr.ry]="svgElement.borderRadius"
+        [attr.fill]="svgElement.fill"
+        [attr.stroke]="svgElement.stroke"
+        [attr.stroke-width]="svgElement.strokeWidth"
+      ></rect>
+      } @else if(svgElement.type === 'star') {
+      <polygon
+        [attr.points]="generateStarPoints(svgElement)"
+        [attr.fill]="svgElement.fill"
+        [attr.stroke]="svgElement.stroke"
+        [attr.stroke-width]="svgElement.strokeWidth"
+      ></polygon>
+      }
+    </g>
+    }
+  </svg>
+</div>
