@@ -11,5 +11,5 @@ import { ElementService } from '../../services/element.service';
   styleUrls: ['./toolbar.component.scss'],
 })
 export class ToolbarComponent {
-  protected elementsService = inject(ElementService);
+  protected elementService = inject(ElementService);
 }

@@ -6,20 +6,22 @@
       icon="pi pi-expand"
       severity="contrast"
       styleClass="w-full"
-      (click)="elementsService.addElement('rectangle')"
+      (click)="elementService.addElement('rectangle')"
     ></p-button>
     <p-button
       label="Adicionar Estrela"
       icon="pi pi-star"
       severity="contrast"
       styleClass="w-full"
-      (click)="elementsService.addElement('star')"
+      (click)="elementService.addElement('star')"
     ></p-button>
     <p-button
       label="Excluir Elemento"
       icon="pi pi-trash"
       severity="danger"
       styleClass="w-full"
+      [disabled]="!elementService.selectedElement()"
+      (click)="elementService.deleteElement()"
     ></p-button>
   </div>
 </div>

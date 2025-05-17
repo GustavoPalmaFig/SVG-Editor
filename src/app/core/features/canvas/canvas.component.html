@@ -1,7 +1,14 @@
 <div
   class="border border-gray-300 rounded-md overflow-hidden bg-white w-full h-full"
 >
-  <svg #svgCanvas class="w-full h-full">
+  <svg
+    #svgCanvas
+    class="w-full h-full"
+    (mousedown)="onCanvasMouseDown($event)"
+    (mousemove)="onCanvasMouseMove($event)"
+    (mouseup)="onCanvasMouseUp()"
+    (mouseleave)="onCanvasMouseLeave()"
+  >
     @for(svgElement of svgElements(); track svgElement.id) {
     <g>
       @if (svgElement.type === 'rectangle') {
@@ -13,15 +20,25 @@
         [attr.rx]="svgElement.borderRadius"
         [attr.ry]="svgElement.borderRadius"
         [attr.fill]="svgElement.fill"
-        [attr.stroke]="svgElement.stroke"
-        [attr.stroke-width]="svgElement.strokeWidth"
+        [attr.stroke]="svgElement.isSelected ? '#1976D2' : svgElement.stroke"
+        [attr.stroke-width]="
+          svgElement.isSelected
+            ? svgElement.strokeWidth + 2
+            : svgElement.strokeWidth
+        "
+        (mousedown)="onElementMouseDown($event, svgElement)"
       ></rect>
       } @else if(svgElement.type === 'star') {
       <polygon
         [attr.points]="generateStarPoints(svgElement)"
         [attr.fill]="svgElement.fill"
-        [attr.stroke]="svgElement.stroke"
-        [attr.stroke-width]="svgElement.strokeWidth"
+        [attr.stroke]="svgElement.isSelected ? '#1976D2' : svgElement.stroke"
+        [attr.stroke-width]="
+          svgElement.isSelected
+            ? svgElement.strokeWidth + 2
+            : svgElement.strokeWidth
+        "
+        (mousedown)="onElementMouseDown($event, svgElement)"
       ></polygon>
       }
     </g>
