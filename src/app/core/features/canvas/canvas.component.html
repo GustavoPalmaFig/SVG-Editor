@@ -1,6 +1,8 @@
-<div class="border border-gray-300 rounded-md overflow-hidden bg-white">
+<div
+  class="border border-gray-300 rounded-md overflow-hidden bg-white w-full h-full"
+>
   <svg #svgCanvas class="w-full h-full">
-    @for(svgElement of svgElements; track svgElement.id) {
+    @for(svgElement of svgElements(); track svgElement.id) {
     <g>
       @if (svgElement.type === 'rectangle') {
       <rect

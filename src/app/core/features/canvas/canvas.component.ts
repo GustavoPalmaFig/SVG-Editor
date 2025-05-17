@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { StarEntity } from '../../shapes/star/entity/star.entity';
-import { RectangleEntity } from '../../shapes/rectangle/entity/rectangle.entity';
+import { ElementService } from '../../shared/services/element.service';
 
 @Component({
   selector: 'app-canvas',
@@ -11,11 +11,9 @@ import { RectangleEntity } from '../../shapes/rectangle/entity/rectangle.entity'
   styleUrls: ['./canvas.component.scss'],
 })
 export class CanvasComponent {
-  svgElements: Array<RectangleEntity | StarEntity> = [];
+  protected elementsService = inject(ElementService);
 
-  constructor() {
-    this.svgElements = [new RectangleEntity(), new StarEntity()];
-  }
+  protected svgElements = this.elementsService.elements;
 
   generateStarPoints(star: StarEntity): string {
     return star.generatePoints();
