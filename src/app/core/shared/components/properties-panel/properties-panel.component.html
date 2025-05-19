@@ -71,6 +71,46 @@
         </div>
       </div>
     </div>
+    } @else if(isStar(element)) {
+    <div class="mb-6 bg-white rounded-md p-4">
+      <h4 class="font-medium text-gray-700 mb-3">Estrela</h4>
+
+      <div class="mb-3 flex flex-col">
+        <label for="points" class="text-sm text-gray-600"
+          >Número de Pontas:</label
+        >
+        <div class="flex items-center">
+          <input
+            type="range"
+            id="points"
+            min="3"
+            max="12"
+            step="1"
+            class="flex-1"
+            [(ngModel)]="element.points"
+          /><span class="ml-2 text-sm text-gray-600">{{ element.points }}</span>
+        </div>
+      </div>
+
+      <div class="mb-3 flex flex-col">
+        <label for="innerRadius" class="text-sm text-gray-600"
+          >Comprimento das Pontas:</label
+        >
+        <div class="flex items-center">
+          <input
+            type="range"
+            id="innerRadius"
+            min="5"
+            max="50"
+            step="5"
+            class="flex-1"
+            [(ngModel)]="element.innerRadius"
+          /><span class="ml-2 text-sm text-gray-600"
+            >{{ (element.innerRadius / element.outerRadius) * 100 }}%</span
+          >
+        </div>
+      </div>
+    </div>
     }
 
     <div class="mb-6 bg-white rounded-md p-4">

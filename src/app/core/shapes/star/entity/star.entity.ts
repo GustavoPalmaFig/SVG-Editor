@@ -25,7 +25,7 @@ export class StarEntity implements Star {
     this.stroke = params.stroke ?? '#FFA000';
     this.strokeWidth = params.strokeWidth ?? 2;
     this.points = params.points ?? 5;
-    this.innerRadius = params.innerRadius ?? 25;
+    this.innerRadius = params.innerRadius ?? 20;
     this.outerRadius = params.outerRadius ?? 50;
     this.isSelected = params.isSelected ?? false;
   }
