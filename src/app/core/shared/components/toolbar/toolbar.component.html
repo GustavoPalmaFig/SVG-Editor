@@ -19,10 +19,18 @@
     <p-button
       label="Excluir Elemento"
       icon="pi pi-trash"
-      severity="danger"
+      severity="warn"
       styleClass="w-full"
       [disabled]="!elementService.selectedElement()"
       (click)="elementService.deleteElement()"
+    ></p-button>
+    <p-button
+      label="Limpar"
+      icon="pi pi-eraser"
+      severity="danger"
+      styleClass="w-full"
+      [disabled]="elementService.elements().length == 0"
+      (click)="elementService.cleanCanva()"
     ></p-button>
   </div>
 </div>

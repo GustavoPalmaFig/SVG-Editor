@@ -73,6 +73,11 @@ export class ElementService {
     this._selectedElementId.set(null);
   }
 
+  cleanCanva(): void {
+    this._elements.set([]);
+    this._selectedElementId.set(null);
+  }
+
   moveElement(deltaX: number, deltaY: number): void {
     const selectedId = this._selectedElementId();
     if (!selectedId) return;
