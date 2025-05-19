@@ -17,8 +17,10 @@ export class CanvasComponent {
 
   protected svgElements = this.elementService.elements;
   private draggedElement: SvgElement | null = null;
+  private resizedElement: SvgElement | null = null;
   private lastMouseX = 0;
   private lastMouseY = 0;
+  private resizeHandle: string | null = null;
 
   protected isRectangle = isRectangle;
   protected isStar = isStar;
@@ -56,11 +58,15 @@ export class CanvasComponent {
   }
 
   onCanvasMouseMove(event: MouseEvent) {
-    if (event.buttons === 1 && this.draggedElement) {
+    if (event.buttons === 1) {
       const deltaX = event.clientX - this.lastMouseX;
       const deltaY = event.clientY - this.lastMouseY;
 
-      this.elementService.moveElement(deltaX, deltaY);
+      if (this.draggedElement) {
+        this.elementService.moveElement(deltaX, deltaY);
+      } else if (this.resizedElement && this.resizeHandle) {
+        this.elementService.resizeElement(this.resizeHandle, deltaX, deltaY);
+      }
 
       this.lastMouseX = event.clientX;
       this.lastMouseY = event.clientY;
@@ -73,5 +79,18 @@ export class CanvasComponent {
 
   onCanvasMouseLeave() {
     this.onCanvasMouseUp();
+  }
+
+  onResizeHandleMouseDown(
+    event: MouseEvent,
+    element: SvgElement,
+    handle: string
+  ) {
+    event.stopPropagation();
+
+    this.resizedElement = element;
+    this.resizeHandle = handle;
+    this.lastMouseX = event.clientX;
+    this.lastMouseY = event.clientY;
   }
 }

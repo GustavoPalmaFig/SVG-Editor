@@ -48,6 +48,56 @@
         "
         (mousedown)="onElementMouseDown($event, svgElement)"
       ></polygon>
+      } @if (svgElement.isSelected) {
+      <g>
+        <circle
+          [attr.cx]="svgElement.x"
+          [attr.cy]="svgElement.y"
+          r="6"
+          fill="white"
+          stroke="#1976D2"
+          stroke-width="2"
+          class="cursor-nw-resize"
+          (mousedown)="onResizeHandleMouseDown($event, svgElement, 'top-left')"
+        ></circle>
+
+        <circle
+          [attr.cx]="svgElement.x + svgElement.width"
+          [attr.cy]="svgElement.y"
+          r="6"
+          fill="white"
+          stroke="#1976D2"
+          stroke-width="2"
+          class="cursor-ne-resize"
+          (mousedown)="onResizeHandleMouseDown($event, svgElement, 'top-right')"
+        ></circle>
+
+        <circle
+          [attr.cx]="svgElement.x"
+          [attr.cy]="svgElement.y + svgElement.height"
+          r="6"
+          fill="white"
+          stroke="#1976D2"
+          stroke-width="2"
+          class="cursor-sw-resize"
+          (mousedown)="
+            onResizeHandleMouseDown($event, svgElement, 'bottom-left')
+          "
+        ></circle>
+
+        <circle
+          [attr.cx]="svgElement.x + svgElement.width"
+          [attr.cy]="svgElement.y + svgElement.height"
+          r="6"
+          fill="white"
+          stroke="#1976D2"
+          stroke-width="2"
+          class="cursor-se-resize"
+          (mousedown)="
+            onResizeHandleMouseDown($event, svgElement, 'bottom-right')
+          "
+        ></circle>
+      </g>
       }
     </g>
     }

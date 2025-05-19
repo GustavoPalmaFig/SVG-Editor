@@ -93,6 +93,49 @@ export class ElementService {
     );
   }
 
+  resizeElement(handle: string, deltaX: number, deltaY: number): void {
+    const selectedId = this._selectedElementId();
+    const selectedElement = this.selectedElement();
+
+    if (!selectedId || !selectedElement) return;
+
+    this._elements.update((els) =>
+      els.map((el) => {
+        if (el.id === selectedId) {
+          let newWidth = selectedElement.width;
+          let newHeight = selectedElement.height;
+
+          switch (handle) {
+            case 'top-left':
+              el.x = el.x + deltaX;
+              el.y = el.y + deltaY;
+              newWidth = el.width - deltaX > 20 ? el.width - deltaX : 20;
+              newHeight = el.height - deltaY > 20 ? el.height - deltaY : 20;
+              break;
+            case 'top-right':
+              el.y = el.y + deltaY;
+              newWidth = el.width + deltaX;
+              newHeight = el.height - deltaY;
+              break;
+            case 'bottom-left':
+              el.x = el.x + deltaX;
+              newWidth = el.width - deltaX;
+              newHeight = el.height + deltaY;
+              break;
+            case 'bottom-right':
+              newWidth = el.width + deltaX;
+              newHeight = el.height + deltaY;
+              break;
+          }
+
+          el.width = Math.max(20, newWidth);
+          el.height = Math.max(20, newHeight);
+        }
+        return el;
+      })
+    );
+  }
+
   updateSelectedElement() {
     this._elements.set([...this._elements()]);
   }
