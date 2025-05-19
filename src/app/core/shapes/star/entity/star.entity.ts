@@ -47,4 +47,8 @@ export class StarEntity implements Star {
 
     return points.join(' ');
   }
+
+  get pointsValue(): string {
+    return this.generatePoints();
+  }
 }

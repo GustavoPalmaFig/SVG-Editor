@@ -17,8 +17,8 @@
         [attr.y]="svgElement.y"
         [attr.width]="svgElement.width"
         [attr.height]="svgElement.height"
-        [attr.rx]="svgElement.borderRadius"
-        [attr.ry]="svgElement.borderRadius"
+        [attr.rx]="getBorderRadiusValue(svgElement)"
+        [attr.ry]="getBorderRadiusValue(svgElement)"
         [attr.fill]="svgElement.fill"
         [attr.stroke]="svgElement.isSelected ? '#1976D2' : svgElement.stroke"
         [attr.stroke-width]="
@@ -30,7 +30,7 @@
       ></rect>
       } @else if(svgElement.type === 'star') {
       <polygon
-        [attr.points]="generateStarPoints(svgElement)"
+        [attr.points]="getStarPoints(svgElement)"
         [attr.fill]="svgElement.fill"
         [attr.stroke]="svgElement.isSelected ? '#1976D2' : svgElement.stroke"
         [attr.stroke-width]="

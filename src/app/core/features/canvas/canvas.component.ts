@@ -21,8 +21,18 @@ export class CanvasComponent {
 
   @ViewChild('svgCanvas', { static: true }) svgCanvas!: ElementRef<SVGElement>;
 
-  generateStarPoints(star: StarEntity): string {
-    return star.generatePoints();
+  getBorderRadiusValue(element: SvgElement): number {
+    return typeof (element as any).borderRadius === 'number'
+      ? (element as any).borderRadius
+      : 0;
+  }
+
+  getStarPoints(star: SvgElement): string {
+    if (!(star instanceof StarEntity)) {
+      return '';
+    }
+
+    return star.pointsValue;
   }
 
   onCanvasMouseDown(event: MouseEvent) {

@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { computed, effect, Injectable, signal } from '@angular/core';
 import { SvgElement } from '../interfaces/svg-element.interface';
 import { StarEntity } from '../../shapes/star/entity/star.entity';
 import { RectangleEntity } from '../../shapes/rectangle/entity/rectangle.entity';
@@ -7,11 +7,14 @@ import { RectangleEntity } from '../../shapes/rectangle/entity/rectangle.entity'
   providedIn: 'root',
 })
 export class ElementService {
-  private _elements = signal<Array<RectangleEntity | StarEntity>>([]);
-  private _selectedElement = signal<SvgElement | null>(null);
+  private _elements = signal<Array<SvgElement>>([]);
+  private _selectedElementId = signal<string | null>(null);
 
   public readonly elements = this._elements.asReadonly();
-  public readonly selectedElement = this._selectedElement.asReadonly();
+  public readonly selectedElement = computed(
+    () =>
+      this._elements().find((el) => el.id === this._selectedElementId()) ?? null
+  );
 
   addElement(type: 'rectangle' | 'star'): void {
     let newElement: RectangleEntity | StarEntity;
@@ -22,47 +25,40 @@ export class ElementService {
       newElement = new StarEntity();
     }
 
-    this._elements.update((elements) => [...elements, newElement]);
+    this._elements.update((els) => [...els, newElement]);
   }
 
   selectElement(element: SvgElement | null): void {
+    this._selectedElementId.set(element?.id ?? null);
+
     this._elements.update((elements) =>
       elements.map((el) => {
-        el.isSelected = element?.id === el.id;
+        el.isSelected = el.id === element?.id;
         return el;
       })
     );
-
-    const selected =
-      this._elements().find((el) => el.id === element?.id) || null;
-    this._selectedElement.set(selected);
   }
 
-  deleteElement() {
-    this._elements.update((elements) => {
-      const index = elements.findIndex(
-        (el) => el.id === this.selectedElement()?.id
-      );
+  deleteElement(): void {
+    const selectedId = this._selectedElementId();
+    if (!selectedId) return;
 
-      if (index !== -1) {
-        elements.splice(index, 1);
-        this._selectedElement.set(null);
-      }
-      return elements;
-    });
+    this._elements.update((els) => els.filter((el) => el.id !== selectedId));
+    this._selectedElementId.set(null);
   }
 
-  moveElement(deltaX: number, deltaY: number) {
-    this._elements.update((elements) => {
-      const index = elements.findIndex(
-        (el) => el.id === this.selectedElement()?.id
-      );
+  moveElement(deltaX: number, deltaY: number): void {
+    const selectedId = this._selectedElementId();
+    if (!selectedId) return;
 
-      if (index !== -1) {
-        elements[index].x += deltaX;
-        elements[index].y += deltaY;
-      }
-      return elements;
-    });
+    this._elements.update((els) =>
+      els.map((el) => {
+        if (el.id === selectedId) {
+          el.x = el.x + deltaX;
+          el.y = el.y + deltaY;
+        }
+        return el;
+      })
+    );
   }
 }
