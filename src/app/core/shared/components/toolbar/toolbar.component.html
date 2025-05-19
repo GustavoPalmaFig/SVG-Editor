@@ -3,15 +3,16 @@
   <div class="flex flex-col space-y-4 mt-6">
     <p-button
       label="Adicionar Retângulo"
-      icon="pi pi-expand"
-      severity="contrast"
       styleClass="w-full"
       (click)="elementService.addElement('rectangle')"
-    ></p-button>
+    >
+      <ng-template #icon>
+        <div class="w-[1.2rem] h-[1rem] border-2 border-white rounded-xs"></div>
+      </ng-template>
+    </p-button>
     <p-button
       label="Adicionar Estrela"
       icon="pi pi-star"
-      severity="contrast"
       styleClass="w-full"
       (click)="elementService.addElement('star')"
     ></p-button>
