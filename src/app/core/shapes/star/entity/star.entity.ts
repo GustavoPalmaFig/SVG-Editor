@@ -32,16 +32,21 @@ export class StarEntity implements Star {
 
   generatePoints(): string {
     const points = [];
-    const centerX = this.x;
-    const centerY = this.y;
 
-    for (let i = 0; i < this.points * 2; i++) {
-      const radius = i % 2 === 0 ? this.outerRadius : this.innerRadius;
-      const angle = (Math.PI / this.points) * i;
+    const squareSize = Math.min(this.width, this.height);
+    const centerX = this.x + this.width / 2;
+    const centerY = this.y + this.height / 2;
 
-      const x = centerX + radius * Math.sin(angle);
-      const y = centerY - radius * Math.cos(angle);
+    const outerRadius = (squareSize / 2) * 0.9; // um pouco menor que o quadrado
+    const innerRadius = outerRadius * (this.innerRadius / this.outerRadius);
 
+    const step = Math.PI / this.points;
+
+    for (let i = 0; i < 2 * this.points; i++) {
+      const radius = i % 2 === 0 ? outerRadius : innerRadius;
+      const angle = i * step - Math.PI / 2;
+      const x = centerX + radius * Math.cos(angle);
+      const y = centerY + radius * Math.sin(angle);
       points.push(`${x.toFixed()},${y.toFixed()}`);
     }
 

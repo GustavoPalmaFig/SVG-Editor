@@ -29,10 +29,18 @@
         (mousedown)="onElementMouseDown($event, svgElement)"
       ></rect>
       } @else if(isStar(svgElement)) {
+      <rect
+        [attr.x]="svgElement.x"
+        [attr.y]="svgElement.y"
+        [attr.width]="svgElement.width"
+        [attr.height]="svgElement.height"
+        [attr.stroke]="svgElement.isSelected ? '#1976D2' : ''"
+        fill="none"
+        stroke-width="2"
+      />
       <polygon
         [attr.points]="getStarPoints(svgElement)"
         [attr.fill]="svgElement.fill"
-        [attr.stroke]="svgElement.isSelected ? '#1976D2' : svgElement.stroke"
         [attr.stroke-width]="
           svgElement.isSelected
             ? svgElement.strokeWidth + 2
