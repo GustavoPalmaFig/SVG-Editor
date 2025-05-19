@@ -29,6 +29,8 @@ Este projeto é um **Editor SVG Interativo** desenvolvido em Angular 19. Ele per
 
 ### Instruções para Rodar o Projeto
 
+O projeto pode ser acessado através da url: https://svg-editor-six.vercel.app ou localmente seguindo os passos:
+
 1. **Clone o repositório:**
    ```sh
    git clone <url-do-repositorio>
