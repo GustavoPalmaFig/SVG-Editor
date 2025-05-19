@@ -10,24 +10,23 @@
       <div class="mb-3 flex flex-col">
         <label for="fill" class="text-sm text-gray-600"
           >Cor de Preenchimento:</label
-        ><input
+        >
+        <p-colorPicker
           id="fill"
-          class="h-12 w-full"
-          type="color"
           [(ngModel)]="element.fill"
           (ngModelChange)="elementService.updateSelectedElement()"
-        />
+          styleClass="w-full"
+        ></p-colorPicker>
       </div>
 
       <div class="mb-3 flex flex-col">
-        <label for="stroke" class="text-sm text-gray-600">Cor da Borda:</label
-        ><input
+        <label for="stroke" class="text-sm text-gray-600">Cor da Borda:</label>
+        <p-colorPicker
           id="stroke"
-          class="h-12 w-full"
-          type="color"
           [(ngModel)]="element.stroke"
           (ngModelChange)="elementService.updateSelectedElement()"
-        />
+          styleClass="w-full"
+        ></p-colorPicker>
       </div>
 
       <div class="mb-3 flex flex-col">
@@ -35,16 +34,16 @@
           >Espessura da Borda:</label
         >
         <div class="flex items-center">
-          <input
+          <p-slider
             id="strokeWidth"
-            min="0"
-            max="10"
-            step="1"
-            class="flex-1"
-            type="range"
+            [min]="0"
+            [max]="10"
+            [step]="1"
             [(ngModel)]="element.strokeWidth"
             (ngModelChange)="elementService.updateSelectedElement()"
-          /><span class="ml-2 text-sm text-gray-600"
+            class="flex-1"
+          ></p-slider>
+          <span class="ml-3 text-sm text-gray-600"
             >{{ element.strokeWidth }}px</span
           >
         </div>
@@ -60,16 +59,16 @@
           >Arredondamento dos Cantos:</label
         >
         <div class="flex items-center">
-          <input
-            type="range"
+          <p-slider
             id="borderRadius"
-            min="0"
-            max="50"
-            step="1"
-            class="flex-1"
+            [min]="0"
+            [max]="50"
+            [step]="1"
             [(ngModel)]="element.borderRadius"
             (ngModelChange)="elementService.updateSelectedElement()"
-          /><span class="ml-2 text-sm text-gray-600"
+            class="flex-1"
+          ></p-slider>
+          <span class="ml-3 text-sm text-gray-600"
             >{{ element.borderRadius }}px</span
           >
         </div>
@@ -84,16 +83,16 @@
           >Número de Pontas:</label
         >
         <div class="flex items-center">
-          <input
-            type="range"
+          <p-slider
             id="points"
-            min="3"
-            max="12"
-            step="1"
-            class="flex-1"
+            [min]="3"
+            [max]="12"
+            [step]="1"
             [(ngModel)]="element.points"
             (ngModelChange)="elementService.updateSelectedElement()"
-          /><span class="ml-2 text-sm text-gray-600">{{ element.points }}</span>
+            class="flex-1"
+          ></p-slider>
+          <span class="ml-3 text-sm text-gray-600">{{ element.points }}</span>
         </div>
       </div>
 
@@ -102,16 +101,16 @@
           >Comprimento das Pontas:</label
         >
         <div class="flex items-center">
-          <input
-            type="range"
+          <p-slider
             id="innerRadius"
-            min="5"
-            max="50"
-            step="5"
-            class="flex-1"
+            [min]="5"
+            [max]="50"
+            [step]="5"
             [(ngModel)]="element.innerRadius"
             (ngModelChange)="elementService.updateSelectedElement()"
-          /><span class="ml-2 text-sm text-gray-600"
+            class="flex-1"
+          ></p-slider>
+          <span class="ml-3 text-sm text-gray-600"
             >{{ (element.innerRadius / element.outerRadius) * 100 }}%</span
           >
         </div>
@@ -124,48 +123,54 @@
 
       <div class="mb-3 flex flex-col">
         <label for="posX">Posição X:</label>
-        <input
-          type="number"
-          id="posX"
-          class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        <p-inputNumber
+          inputId="posX"
           [(ngModel)]="element.x"
           (ngModelChange)="elementService.updateSelectedElement()"
-        />
+          [showButtons]="true"
+          [step]="1"
+          [min]="0"
+          class="w-full"
+        ></p-inputNumber>
       </div>
 
       <div class="mb-3 flex flex-col">
         <label for="posY">Posição Y:</label>
-        <input
-          type="number"
-          id="posY"
-          class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        <p-inputNumber
+          inputId="posY"
           [(ngModel)]="element.y"
           (ngModelChange)="elementService.updateSelectedElement()"
-        />
+          [showButtons]="true"
+          [step]="1"
+          [min]="0"
+          class="w-full"
+        ></p-inputNumber>
       </div>
 
       <div class="mb-3 flex flex-col">
         <label for="width">Largura:</label>
-        <input
-          type="number"
-          id="width"
-          min="10"
-          class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        <p-inputNumber
+          inputId="width"
           [(ngModel)]="element.width"
           (ngModelChange)="elementService.updateSelectedElement()"
-        />
+          [showButtons]="true"
+          [step]="1"
+          [min]="10"
+          class="w-full"
+        ></p-inputNumber>
       </div>
 
       <div class="mb-3 flex flex-col">
         <label for="height">Altura:</label>
-        <input
-          type="number"
-          id="height"
-          min="10"
-          class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        <p-inputNumber
+          inputId="height"
           [(ngModel)]="element.height"
           (ngModelChange)="elementService.updateSelectedElement()"
-        />
+          [showButtons]="true"
+          [step]="1"
+          [min]="10"
+          class="w-full"
+        ></p-inputNumber>
       </div>
     </div>
   </div>
