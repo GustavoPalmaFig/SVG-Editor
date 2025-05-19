@@ -15,6 +15,7 @@
           class="h-12 w-full"
           type="color"
           [(ngModel)]="element.fill"
+          (ngModelChange)="elementService.updateSelectedElement()"
         />
       </div>
 
@@ -25,6 +26,7 @@
           class="h-12 w-full"
           type="color"
           [(ngModel)]="element.stroke"
+          (ngModelChange)="elementService.updateSelectedElement()"
         />
       </div>
 
@@ -41,6 +43,7 @@
             class="flex-1"
             type="range"
             [(ngModel)]="element.strokeWidth"
+            (ngModelChange)="elementService.updateSelectedElement()"
           /><span class="ml-2 text-sm text-gray-600"
             >{{ element.strokeWidth }}px</span
           >
@@ -65,6 +68,7 @@
             step="1"
             class="flex-1"
             [(ngModel)]="element.borderRadius"
+            (ngModelChange)="elementService.updateSelectedElement()"
           /><span class="ml-2 text-sm text-gray-600"
             >{{ element.borderRadius }}px</span
           >
@@ -88,6 +92,7 @@
             step="1"
             class="flex-1"
             [(ngModel)]="element.points"
+            (ngModelChange)="elementService.updateSelectedElement()"
           /><span class="ml-2 text-sm text-gray-600">{{ element.points }}</span>
         </div>
       </div>
@@ -105,6 +110,7 @@
             step="5"
             class="flex-1"
             [(ngModel)]="element.innerRadius"
+            (ngModelChange)="elementService.updateSelectedElement()"
           /><span class="ml-2 text-sm text-gray-600"
             >{{ (element.innerRadius / element.outerRadius) * 100 }}%</span
           >
@@ -123,6 +129,7 @@
           id="posX"
           class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
           [(ngModel)]="element.x"
+          (ngModelChange)="elementService.updateSelectedElement()"
         />
       </div>
 
@@ -133,6 +140,7 @@
           id="posY"
           class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
           [(ngModel)]="element.y"
+          (ngModelChange)="elementService.updateSelectedElement()"
         />
       </div>
 
@@ -144,6 +152,7 @@
           min="10"
           class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
           [(ngModel)]="element.width"
+          (ngModelChange)="elementService.updateSelectedElement()"
         />
       </div>
 
@@ -155,6 +164,7 @@
           min="10"
           class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
           [(ngModel)]="element.height"
+          (ngModelChange)="elementService.updateSelectedElement()"
         />
       </div>
     </div>

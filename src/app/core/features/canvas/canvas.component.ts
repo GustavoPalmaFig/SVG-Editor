@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { StarEntity } from '../../shapes/star/entity/star.entity';
+import { isRectangle, isStar } from '../../shared/utils/type-guards';
 import { ElementService } from '../../shared/services/element.service';
 import { SvgElement } from '../../shared/interfaces/svg-element.interface';
 
@@ -18,6 +19,9 @@ export class CanvasComponent {
   private draggedElement: SvgElement | null = null;
   private lastMouseX = 0;
   private lastMouseY = 0;
+
+  protected isRectangle = isRectangle;
+  protected isStar = isStar;
 
   @ViewChild('svgCanvas', { static: true }) svgCanvas!: ElementRef<SVGElement>;
 

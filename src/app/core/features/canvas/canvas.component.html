@@ -11,7 +11,7 @@
   >
     @for(svgElement of svgElements(); track svgElement.id) {
     <g>
-      @if (svgElement.type === 'rectangle') {
+      @if (isRectangle(svgElement)) {
       <rect
         [attr.x]="svgElement.x"
         [attr.y]="svgElement.y"
@@ -28,7 +28,7 @@
         "
         (mousedown)="onElementMouseDown($event, svgElement)"
       ></rect>
-      } @else if(svgElement.type === 'star') {
+      } @else if(isStar(svgElement)) {
       <polygon
         [attr.points]="getStarPoints(svgElement)"
         [attr.fill]="svgElement.fill"

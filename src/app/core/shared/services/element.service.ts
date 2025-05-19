@@ -1,4 +1,6 @@
-import { computed, effect, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
+import { StorageService } from './storage.service';
+import { isRectangle, isStar } from '../utils/type-guards';
 import { SvgElement } from '../interfaces/svg-element.interface';
 import { StarEntity } from '../../shapes/star/entity/star.entity';
 import { RectangleEntity } from '../../shapes/rectangle/entity/rectangle.entity';
@@ -15,6 +17,30 @@ export class ElementService {
     () =>
       this._elements().find((el) => el.id === this._selectedElementId()) ?? null
   );
+
+  private storageService = inject(StorageService);
+
+  constructor() {
+    this.loadElements();
+
+    effect(() => {
+      this.storageService.saveElements(this._elements());
+    });
+  }
+
+  loadElements(): void {
+    const storedElements = this.storageService.loadElements();
+    const parsedElements = storedElements.map((obj) => {
+      if (isRectangle(obj)) {
+        return new RectangleEntity(obj);
+      } else if (isStar(obj)) {
+        return new StarEntity(obj);
+      }
+      return obj;
+    });
+
+    this._elements.set(parsedElements);
+  }
 
   addElement(type: 'rectangle' | 'star'): void {
     let newElement: RectangleEntity | StarEntity;
@@ -60,5 +86,9 @@ export class ElementService {
         return el;
       })
     );
+  }
+
+  updateSelectedElement() {
+    this._elements.set([...this._elements()]);
   }
 }
